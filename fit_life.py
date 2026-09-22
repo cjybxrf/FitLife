@@ -3,30 +3,52 @@ WATER_PER_KG = 30
 LITER_OF_WATER = 1000
 
 
-# приветствие
-print('Здравствуйте! Нам нужно познакомиться, чтобы я стал полезным для Вас.')
-print('')
+def main():
+    """Вычисляет индекс массы тела (ИМТ)."""
+    # приветствие
+    print('Здравствуйте! Давайте знакомиться ради вашего блага!\n')
 
-# сбор данных
-user_name = input('Напишите свое имя: ')
-user_age = int(input('Ваш возраст: '))
-user_weight = float(input('Вес в килограммах (например 75.5): '))
-user_height = float(input('Рост в метрах (например 1.8): '))
-print('__________________________________________')
-print('')
+    # узнаем имя
+    while True:
+        user_name = input('Напишите свое имя: ').split()
+        if user_name:
+            break
+        print('Пожалуйста, введите имя.\n')
 
-# расчёт индекса массы тела
-bmi = user_weight / (user_height ** 2)
-bmi = round(bmi, 1)
+    # узнаем возраст
+    while True:
+        try:
+            user_age = int(input('Ваш возраст: '))
+            break
+        except ValueError:
+            print('Введите целое число (например, 25).\n')
 
-# расчёт рекомендуемой нормы воды
-water_ml = user_weight * WATER_PER_KG
-water_l = water_ml / LITER_OF_WATER
-water_l = round(water_l, 1)
+    # узнаем вес
+    user_weight = float(input('Вес в килограммах: ').replace(',', '.'))
 
-# итоговый отчет
-print(f'Отчет для пользователя: {user_name} ({user_age} г.)')
-print(f'Ваш Индекс Массы Тела: {bmi}')
-print(f'Рекомендуемая норма воды: {water_l} л. в день')
-print('')
-print('Расчет окончен. Будьте здоровы!')
+    # узнаем рост
+    user_height = float(input('Рост в метрах: ').replace(',', '.'))
+    print('__________________________________________\n')
+
+    # расчёт индекса массы тела
+    bmi = user_weight / (user_height ** 2)
+    bmi = round(bmi, 1)
+
+    # расчёт рекомендуемой нормы воды
+    water_ml = user_weight * WATER_PER_KG
+    water_l = water_ml / LITER_OF_WATER
+    water_l = round(water_l, 1)
+
+    return user_name, user_age, bmi, water_l
+
+
+if __name__ == '__main__':
+    user_name, user_age, bmi, water_l = main()
+
+    # итоговый отчет
+    print(
+        f'Отчет для пользователя: {user_name} ({user_age} г.)\n'
+        f'Ваш Индекс Массы Тела: {bmi}\n'
+        f'Рекомендуемая норма воды: {water_l} л. в день\n\n'
+        'Расчет окончен. Будьте здоровы!\n'
+    )
