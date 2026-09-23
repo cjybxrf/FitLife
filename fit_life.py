@@ -10,7 +10,7 @@ def main():
 
     # узнаем имя
     while True:
-        user_name = input('Напишите свое имя: ').split()
+        user_name = input('Напишите свое имя: ')
         if user_name:
             break
         print('Пожалуйста, введите имя.\n')
